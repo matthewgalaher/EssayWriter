@@ -141,24 +141,108 @@
             <option  value="edit">Edit</option>
             <option value="review">Review</option>
     </select>
-    <button id="cleardata">Clear Essay Fields</button>
+    <button id="cleardata">Clear Essay Fields</button><input type="checkbox" id="sampletext"><span class="buttonlabel">&nbsp;Add Sample Text</span>
 </div>
 
 <script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 $(document).ready(function(){
+
+
+/* SAMPLE TEXT START */
+var theSampleText = {
+        'thesis' : 'Catcher is a story about man’s inhumanity to man.',
+        'supportingArg1' : ' People are really mean to Holden in this book.',
+        'citetext1a' : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at quam id ante condimentum eleifend euismod non nulla.',
+        'citetext2a' : 'Holden is called an idiot.  Nunc quam ex, vestibulum non placerat a, fringilla non orci. Fusce vitae gravida justo. Donec posuere est vitae sem sagittis, non hendrerit est vestibulum. Vivamus urna lectus, malesuada eget accumsan quis, elementum ac neque. Donec eget lorem posuere sapien maximus semper vitae eget massa. Aliquam scelerisque sed urna sit amet accumsan. Nullam auctor, nunc eu fermentum consequat, magna nunc faucibus lorem, vel rhoncus dui erat et tortor. Donec fringilla nibh sit amet leo volutpat ultrices. Mauris lectus massa, convallis nec elit eu, eleifend consequat odio. Fusce faucibus dapibus massa, ut aliquet dui aliquet ut.',
+        'citetext3a' : 'Sam tells him, "You are a loser." Praesent eu rhoncus dolor. Vivamus tempor mi in dui maximus cursus. Pellentesque et tellus pulvinar, consectetur libero id, tristique neque.',
+        'citetext4a' : 'Fusce magna augue, eleifend vel libero nec, condimentum porttitor libero. Etiam tincidunt, purus et volutpat tincidunt, massa ante maximus leo, ac posuere lorem tellus et enim. Phasellus pretium, turpis eget gravida lacinia, ligula nisl elementum enim, a mollis diam nunc vitae leo. Proin dapibus nec quam vel auctor.',
+        'citetext5a' : 'Phasellus pretium, turpis eget gravida lacinia, ligula nisl elementum enim, a mollis diam nunc vitae leo. Proin dapibus nec quam vel auctor. Duis convallis, metus ut facilisis rutrum, risus felis viverra leo, vitae maximus diam massa vitae lorem. Sed id luctus purus, id elementum lectus.',
+        'supportingArg2' : 'Holden is unkind to everyone he meets in New York City.',
+        'citetext1b' : 'He makes Sally cry. Nunc lacinia erat volutpat fermentum rutrum. Nunc orci ligula, egestas porttitor urna ac, facilisis ultricies nulla. Donec feugiat, est et tristique vehicula, quam velit gravida est, sed molestie turpis nisl ac tortor.',
+        'citetext2b' : 'He steals from his teacher. Pellentesque suscipit tortor libero, feugiat ullamcorper lacus tempus at. Morbi sollicitudin augue metus, sed sagittis dolor rutrum sed. Duis ipsum lacus, porta vitae blandit eget, bibendum nec nisi. Nam pulvinar consequat iaculis.',
+        'citetext3b' : 'He calls his friend, a big phony. Nulla pulvinar nisl ut semper dignissim. Quisque ultrices libero id magna dictum viverra. Sed consequat tellus justo.',
+        'citetext4b' : 'Aenean faucibus sagittis finibus. Nullam sed placerat orci. Mauris nibh ex, eleifend vitae nisi eget, maximus venenatis lorem. Maecenas ornare justo sit amet purus elementum, quis congue risus lacinia. Aenean dictum massa vel dignissim semper.',
+        'citetext5b' : 'Vestibulum nec tortor sed felis bibendum maximus. Quisque tempus ex sit amet augue varius, eleifend ultricies sem vestibulum. Donec vel leo semper, molestie tortor in, eleifend purus.',
+        'supportingArg3' : 'People never apologize in this book even after doing something very cruel.',
+        'citetext1c' : 'When Holden makes Phoebe sick, he doesn’t say he’s sorry. Proin laoreet libero neque. Nam iaculis ligula sit amet enim auctor pharetra. In quis massa mi. Praesent ut accumsan ligula, ac mattis ex. Cras id molestie orci.',
+        'citetext2c' : 'His teacher says, “Suck it up” after giving Holden an F. Phasellus at sollicitudin lacus, vel mattis ante. Vestibulum ac metus rutrum neque maximus pretium sit amet aliquam ex. Pellentesque at urna turpis. Sed malesuada placerat porta.',
+        'citetext3c' : 'After breaking Holden’s nose, the doorman laughs at him. Ut vestibulum pellentesque nunc, vitae congue urna aliquet interdum. Pellentesque facilisis magna quis mattis auctor. Praesent tellus dolor, tincidunt quis ligula in, efficitur vestibulum turpis.',
+        'citetext4c' : 'Aenean consequat ultrices arcu vel sagittis. Quisque sem arcu, faucibus eget tellus sit amet, cursus viverra eros. Sed in magna id lorem sollicitudin elementum maximus non augue.',
+        'citetext5c' : 'Nam a odio ac ante ornare blandit non eu lacus. Morbi vel dictum erat. Aliquam orci ex, pellentesque sit amet tempor vel, dictum a erat. Suspendisse eros magna, egestas eu commodo id, mattis a quam. Vestibulum non quam rhoncus, suscipit ligula ut, laoreet sapien. Vivamus luctus, nisl nec consectetur tempor, dui velit facilisis neque, at bibendum justo nunc non lectus.',
+        'concluding_thought' : 'Salinger must have had a really bad childhood to write such a depressing book in which everyone is so mean.'    
+    };
+
+
+
+$( "input#sampletext" ).change(function() {
+
+    var checkboxValue = $(this).prop('checked');
+    
+        // alert(checkboxValue);
+        // $("textarea#thesis").val("Catcher is a story about man’s inhumanity to man.");
+        
+        
+        for (var key in theSampleText) {
+          if (theSampleText.hasOwnProperty(key)) {
+            // alert(key + " -> " + theSampleText[key]);
+            $("#" + key).val(theSampleText[key]); 
+            
+          }
+        }
+        
+        
+        
+        
+        
+    
+    if(checkboxValue){
+    // If checked change all fields to demo content
+
+
+
+    }else{
+    
+
+    }
+
+});
+
+/* SAMPLE TEXT END */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $( "#changeCss" ).change(function() {
 
