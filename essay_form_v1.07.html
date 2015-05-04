@@ -141,7 +141,7 @@
             <option  value="edit">Edit</option>
             <option value="review">Review</option>
     </select>
-    <button id="cleardata">Clear Essay Fields</button><input type="checkbox" id="sampletext"><span class="buttonlabel">&nbsp;Add Sample Text</span>
+    <button id="cleardata">Clear Essay Fields</button><button id="sampletext"><span class="buttonlabel">&nbsp;Add Sample Text</span>
 </div>
 
 <script>
@@ -174,7 +174,7 @@ var theSampleText = {
 
 
 
-$( "input#sampletext" ).change(function() {
+$( "button#sampletext" ).click(function() {
 
     var checkboxValue = $(this).prop('checked');
     
