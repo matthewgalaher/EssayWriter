@@ -132,7 +132,7 @@
 		<textarea id="essay_output" name="essay_output" class="output">output 
 
 	</textarea>
-	<div id="btnContainer"><button id="up">^</button>
+	<div id="btnContainer" style="float:right !important;"><button id="up">^</button>
 <button id="down">^</button></div>
 	</form>
 </div>
@@ -160,13 +160,13 @@
 
 $(document).ready(function(){
 
-$( "#changeCss" ).click(function() {
+$( "#changeCss" ).change(function() {
 
      $("link#styleSheetSelect").attr("href", "css/" + $("#changeCss").val() + ".css");
 
-    alert("theincrement is " + theincrement);     
+    // alert("theincrement is " + theincrement);     
              theincrement = 0;
-    alert("theincrement has been changed to " + theincrement);     
+    // alert("theincrement has been changed to " + theincrement);     
     
     if($("#changeCss").val() === "review"){
     
@@ -181,7 +181,7 @@ $( "#changeCss" ).click(function() {
         $("select#changeCss").css("display", "inline");
         $("button#cleardata").css("display", "none");             
         $("div#btnContainer").css("display", "inline-block");
-        $("div#btnContainer").css("float", "right");
+//         $("div#btnContainer").css("float", "right");
         $("button#up").css("background-color", "#666");
         $("button#up").css("display", "block");
         $("button#down").css("display", "block");
@@ -229,7 +229,8 @@ $( "#changeCss" ).click(function() {
         $("div#ui").css("left", "15px");             
         $("select#changeCss").css("display", "inline");        
         $("button#cleardata").css("display", "inline"); 
-        
+
+//         $("div#btnContainer").css("display", "none");        
         $("button#up").css("display", "none");
         $("button#down").css("display", "none");
         
@@ -443,7 +444,8 @@ $( "#up" ).click(function() {
 
     // Increment for next time (this also needs to uncommented elsewhere):
     
-    $("body").append(theincrement);
+/* :: THE FOLLOWING LINE HAPPENS IN TWO PLACES IN THIS FILE :: */
+//     $("body").append(theincrement);
 
 });
 
@@ -579,8 +581,8 @@ $( "#down" ).click(function() {
         }
     
     }
-//     (this also needs to uncommented elsewhere):
-    $("body").append(theincrement);
+/* :: THE FOLLOWING LINE HAPPENS IN TWO PLACES IN THIS FILE :: */
+//     $("body").append(theincrement);
 });
 
 
