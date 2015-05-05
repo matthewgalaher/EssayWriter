@@ -16,40 +16,6 @@
 <!--   <link rel="stylesheet" href="http://jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css"> -->
 <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
 
-  <script>
-$(function() {
-    $( "#dialog-confirm" ).dialog({
-      resizable: false,
-      height:140,
-      modal: true,
-      buttons: {
-        "Delete all items": function() {
-          $( this ).dialog( "close" );
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-  });
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </head>
 <body>
 <div id="main">
@@ -185,10 +151,13 @@ $(function() {
     <button id="cleardata">Clear Essay Fields</button><button id="sampletext"><span class="buttonlabel">&nbsp;Add Sample Text</span>
 </div>
 
-<div id="dialog-confirm" title="Empty the recycle bin?">
-  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+<div id="dialog-confirm-sample_text" title="Insert Demo Text?" style="visibility:hidden">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This action will overwrite the fields with demo text. Any writing you've done will be deleted. Are you sure?</p>
 </div>
- <p>Sed vel diam id libero <a href="http://example.com">rutrum convallis</a>. Donec aliquet leo vel magna. Phasellus rhoncus faucibus ante. Etiam bibendum, enim faucibus aliquet rhoncus, arcu felis ultricies neque, sit amet auctor elit eros a lectus.</p>
+<div id="dialog-confirm-clear_form" title="Clear All Text Fields?" style="visibility:hidden">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure you want to reset the form? All your writing will be lost.</p>
+</div>
+
  
  
 
@@ -197,7 +166,7 @@ $(function() {
 $(document).ready(function(){
 
 
-/* SAMPLE TEXT START */
+/* INSERT SAMPLE TEXT START */
 var theSampleText = {
         'thesis' : 'Catcher is a story about man’s inhumanity to man.',
         'supportingArg1' : ' People are really mean to Holden in this book.',
@@ -221,75 +190,65 @@ var theSampleText = {
         'concluding_thought' : 'Salinger must have had a really bad childhood to write such a depressing book in which everyone is so mean.'    
     };
 
-
-
 $( "button#sampletext" ).click(function() {
 
-    var checkboxValue = $(this).prop('checked');
-    
-        // alert(checkboxValue);
-        // $("textarea#thesis").val("Catcher is a story about man’s inhumanity to man.");
-        
-        
+    $("div#dialog-confirm-sample_text").css("visibility","visible");
+    $("div#dialog-confirm-sample_text" ).dialog({
+      resizable: false,
+      height:160,
+      modal: true,
+      buttons: {
+        "Continue": function() {
+            insertSampleText();
+          $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+
+    function insertSampleText(){
         for (var key in theSampleText) {
           if (theSampleText.hasOwnProperty(key)) {
-            // alert(key + " -> " + theSampleText[key]);
             $("#" + key).val(theSampleText[key]); 
-            
           }
         }
-        
-        
-        
-        
-        
-    
-    if(checkboxValue){
-    // If checked change all fields to demo content
-
-
-
-    }else{
-    
-
     }
 
 });
+/* INSERT SAMPLE TEXT END */
 
-/* SAMPLE TEXT END */
+/* START CLEAR FIELDS AND DATA */
+$( "#cleardata" ).click(function() {
 
+    $( "button#cleardata" ).click(function() {
 
+        $("div#dialog-confirm-clear_form").css("visibility","visible");
+        $("div#dialog-confirm-clear_form" ).dialog({
+          resizable: false,
+          height:160,
+          modal: true,
+          buttons: {
+            "Clear Text": function() {
+                insertSampleText();
+              $( this ).dialog( "close" );
+            },
+            Cancel: function() {
+              $( this ).dialog( "close" );
+            }
+          }
+        });
 
+        function insertSampleText(){
+            localStorage.removeItem("textFieldDate");
+            $('#essayForm').trigger("reset");
+        }
 
+    });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
+/* END CLEAR FIELDS AND DATA */
 
 
 
@@ -407,17 +366,6 @@ $( "#changeCss" ).change(function() {
         
         
     });
-
-$( "#cleardata" ).click(function() {
-
-alert("Are you sure you want to reset the form? All your writing will be lost. I NEED TO ADD A CANCEL OK BUTTON HERE");
-
-    localStorage.removeItem("textFieldDate");
-    $('#essayForm').trigger("reset");
-});
-
-
-
 
 
 /* ::::::::::::::::::::::::::::::::::::::::::::: */
@@ -859,15 +807,6 @@ parseData(localDBSting);
         $('#essay_output').val(fullEssayString);
     });
 
-
-
-
-
-
-    
-
-
-
 });
 
 /* LOCAL STORAGE START */
@@ -911,11 +850,6 @@ if (typeof(Storage) != "undefined") {
     //document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     // Idea: There could be a speciic div for error messages via innerHTTML...
 }
-
-             
-
-        
-
 
 /* LOCAL STORAGE END */
 
